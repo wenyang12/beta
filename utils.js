@@ -87,11 +87,11 @@ function getJSXContent(name, less) {
     `require('./${less}.less');
 const React = require('react');\n
 const ${name} = React.createClass({
-render() {
-  return (
-    <div />
-  );
-}
+  render() {
+    return (
+      <div />
+    );
+  }
 });\n
 module.exports = ${name};`;
   return content;

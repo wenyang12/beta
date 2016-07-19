@@ -23,7 +23,23 @@ exports.generate = function(modules, options) {
   }
 
   modules.forEach((module) => {
-    fs.writeFileSync(`${module_dir}/${module}.js`, 'module.exports = null;', 'utf8');
+    let file = `${module_dir}/${module}.js`;
+    let create = function(file) {
+      fs.writeFileSync(file, 'module.exports = null;', 'utf8');
+    };
+    try {
+      fs.statSync(file);
+      if (options.force) {
+        console.log(`覆盖旧${module}模块`);
+        create(file);
+        return;
+      }
+      console.error(`模块${module}已存在`);
+    } catch (e) {
+      console.log(`开始创建${module}模块`);
+      create(file);
+      console.log(`成功创建${module}模块`);
+    }
   });
 
   // 删除.gitignore

@@ -19,6 +19,11 @@ exports.generate = function(components, options) {
   components.forEach((component) => {
     try {
       fs.statSync(`${dir}/${component}`);
+      if(options.force) {
+        console.log(`覆盖旧${component}组件`);
+        utils.createComponent(component, dir);
+        return;
+      }
       console.error(`${component}组件已存在`);
     } catch (e) {
       console.log(`开始创建${component}组件`);
