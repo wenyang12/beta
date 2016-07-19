@@ -1,0 +1,12 @@
+build
+dev
+mixins
+node_modules
+libs/node_modules
+libs/vendor.js
+libs/vendor.min.js
+libs/react/*.js
+libs/zepto.js
+libs/fastclick.js
+libs/iscroll-lite.js
+libs/rem.min.js

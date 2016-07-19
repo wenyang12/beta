@@ -1,0 +1,12 @@
+[submodule "libs"]
+	path = libs
+	url = http://git.firstshare.cn/fe-h5/libs.git
+[submodule "mixins"]
+	path = mixins
+	url = http://git.firstshare.cn/fe-h5/mixins.git
+[submodule "components"]
+	path = components
+	url = http://git.firstshare.cn/fe-h5/components.git
+[submodule "webpack"]
+  path = webpack
+  url = http://git.firstshare.cn/fe-h5/webpack.git

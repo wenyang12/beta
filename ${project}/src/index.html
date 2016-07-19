@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>>
+<head>
+<meta charset="utf-8" />
+<% if(htmlWebpackPlugin.options.node_env === 'production') { %>
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<link rel="dns-prefetch" href="//<%= htmlWebpackPlugin.options.env %>.fspage.com" />
+<% } %>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>纷享逍客</title>
+</head>
+<body>
+<section id="${project}Container"></section>
+<% if(htmlWebpackPlugin.options.node_env === 'production') { %>
+<!-- production -->
+<script type="text/javascript">
+(function() {
+var isMobile = /Android|iPhone|iPod|iPad/i.test(navigator.userAgent);
+var embedAssets = isMobile && (!/embed=(\d)/.test(location.search) ||
+	RegExp.$1 === '1');
+var remUrl = embedAssets ? '<%= htmlWebpackPlugin.options.embedRem %>' :
+	'<%= htmlWebpackPlugin.options.rem %>';
+var vendorUrl = embedAssets ?
+	'<%= htmlWebpackPlugin.options.embedVendor %>' :
+	'<%= htmlWebpackPlugin.options.vendor %>';
+document.write('<script src="' + remUrl + '"><' + '/script><script src="' +
+	vendorUrl + '"><' + '/script>');
+})();
+</script>
+<script type="text/javascript">
+(function() {
+<%= htmlWebpackPlugin.options.filecache %>
+cache.require('<%= htmlWebpackPlugin.options.jsapi %>', '<%= htmlWebpackPlugin.options.jsapi_version %>');
+<% for(var css in htmlWebpackPlugin.files.css) { %>
+cache.require('<%= htmlWebpackPlugin.files.css[css] %>');
+<% } %>
+<% for(var js in htmlWebpackPlugin.files.js) { %>
+cache.require('<%= htmlWebpackPlugin.files.js[js] %>');
+<% } %>
+})();
+</script>
+<% } else { %>
+<!-- development -->
+<script src="<%= htmlWebpackPlugin.options.rem %>"></script>
+<script src="<%= htmlWebpackPlugin.options.vendor %>"></script>
+<script src="<%= htmlWebpackPlugin.options.jsapi %>"></script>
+<% } %>
+</body>
+</html>
