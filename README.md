@@ -6,11 +6,11 @@
 Beta是基于命令行的脚手架，支持从项目开始的创建到开发阶段，再到打包部署阶段的整个生命周期。  
 
 ## 项目开始前
-1. 从咱们私有npm仓库安装beta。
+从咱们私有npm仓库安装beta。
 ```bash
 npm install -g beta
 ```
-2. 打开命令终端，输入：
+打开命令终端，输入：
 ```bash
 beta -h
 ```
@@ -28,10 +28,10 @@ beta -h
 
 支持的选项列表：
 * -n, --npm： 自动执行`npm install`安装依赖
- ```bash
- beta init -n
- ```
- `npm install`可能会很慢，这个选项请谨慎。
+```bash
+beta init -n
+```
+`npm install`可能会很慢，这个选项请谨慎。
 
 ### `start`  
 启动项目，会自动执行`webpack`本地开发构建程序，开始编译代码，进入正式开发阶段。
