@@ -86,22 +86,21 @@ beta init
  * `git submodule add http://git.firstshare.cn/fe-h5/mixins.git`
  * `git submodule add http://git.firstshare.cn/fe-h5/webpack.git`
 
+3. 初始化完毕后，就能正常进入开发环节了，需要启动`webpack`本地开发编译。
+```bash
+beta start
+```
+webpack即启动了。  
+*在运行这个命令之前，需要先跑完了npm install，安装好了依赖包，如果你有其他H5项目，可以直接从那里把node_modules复制过来使用。*
 
- 3. 初始化完毕后，就能正常进入开发环节了，需要启动`webpack`本地开发编译。
- ```bash
- beta start
- ```
- webpack即启动了。  
- *在运行这个命令之前，需要先跑完了npm install，安装好了依赖包，如果你有其他H5项目，可以直接从那里把node_modules复制过来使用。*
-
- 4. 代码需要一个首页才能跑起来，于是需要用生成器生成一个首页。
- ```bash
- beta generate page home
- ```
- 这个命令会在`demo/src/pages`下生成一个`Home`目录，此目录下有`index.js`、`Home.jsx`和`home.less`三个文件。  
-  * `index.js` 是入口文件，导出了真正的页面组件`Home.jsx`，已自动写上导出代码。  
-  * `Home.jsx` 是真正的页面（React组件），开发时只需在此文件内添加代码。
-  * `home.less` 是首页的样式文件，已在`Home.jsx`自动加上`require('./home.less')`的代码。
+4. 代码需要一个首页才能跑起来，于是需要用生成器生成一个首页。
+```bash
+beta generate page home
+```
+这个命令会在`demo/src/pages`下生成一个`Home`目录，此目录下有`index.js`、`Home.jsx`和`home.less`三个文件。  
+ * `index.js` 是入口文件，导出了真正的页面组件`Home.jsx`，已自动写上导出代码。  
+ * `Home.jsx` 是真正的页面（React组件），开发时只需在此文件内添加代码。
+ * `home.less` 是首页的样式文件，已在`Home.jsx`自动加上`require('./home.less')`的代码。
 
  *页面和组件以大写开头命名，是React组件规范，指示以目录名作为React组件名引用。*
 
