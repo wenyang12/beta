@@ -15,7 +15,7 @@
   "cmd": "build [env]",
   "desc": "构建项目，打包测试或生产环境代码，env参数指定部署环境，支持的环境有`sde` `fte` `fte2` `pte` `fsceshi` `www`"
 }, {
-  "cmd": "generate <type> [widget...]",
+  "cmd": "generate <type> [widgets...]",
   "options": [{
     "option": "-g, --global",
     "desc": "创建全局的公共组件"

@@ -1,3 +1,6 @@
+/**
+ * 构件生成器
+ */
 'use strict';
 
 exports.run = function(type, widgets, options) {

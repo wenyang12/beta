@@ -1,18 +1,18 @@
 {
   "name": "beta",
   "version": "1.0.0",
-  "description": "FS-FE H5 auto-build tool",
+  "description": "FS-FE H5 project scaffolding",
   "contributors": [
     "Luoying <luoying_112@163.com>"
   ],
   "homepage": "https://www.fxiaoke.com",
   "main": "index.js",
   "bin": {
-    "beta": "./bin/beta"
+    "beta": "./bin/beta --harmony"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/beta",
+    "start": "node ./bin/beta --harmony",
     "eslint": "eslint ./**/*.js"
   },
   "pre-commit": [
@@ -27,7 +27,9 @@
     "front-end",
     "h5",
     "webapp",
-    "auto-build"
+    "scaffolding",
+    "generator",
+    "build"
   ],
   "author": "luoying",
   "license": "ISC",

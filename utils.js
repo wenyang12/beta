@@ -22,8 +22,8 @@ const utils = {
    * utils.createComponent('demo/test', '/home/luoying/code/dev/h5/demo/src/components')
    */
   createComponent: function(component, dest) {
+    let capitalize = utils.capitalize(component);
     let getFiles = function(component) {
-      let capitalize = utils.capitalize(component);
       return [{
         name: 'index.js',
         data: `module.exports = require('./${capitalize}');`
@@ -37,9 +37,9 @@ const utils = {
     };
 
     let files = getFiles(component.split('/').pop());
-    this.mkdirSync(dest, component);
+    this.mkdirSync(dest, capitalize);
     files.forEach((file) => {
-      let _file = `${dest}/${component}/${file.name}`;
+      let _file = `${dest}/${capitalize}/${file.name}`;
       fs.writeFileSync(_file, file.data, 'utf8');
       console.log(`完成：${_file}`);
     });
