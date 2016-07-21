@@ -33,7 +33,7 @@ beta -h
 * 添加子模块：添加的子模块有`libs` `components` `mixins` `webpack`
 
 支持的选项列表：
-1. -n, --npm： 自动执行`npm install`安装依赖
+* -n, --npm： 自动执行`npm install`安装依赖
 ```bash
 beta init -n
 ```
@@ -55,19 +55,19 @@ beta init -n
 * generate module：生成非UI组件的业务模块，模块生成在`src/modules`下
 
 支持的选项列表：
-1. -g, --global：创建全局的公共组件，组件默认生成在业务项目的`src/components`目录下，若想在`components`子模块（全局公共组件仓库）创建一个组件，就要带上`-g`或`--global`选项。  
-这个选项仅生成UI组件有效。
+* -g, --global：创建全局的公共组件，组件默认生成在业务项目的`src/components`目录下，若想在`components`子模块（全局公共组件仓库）创建一个组件，就要带上`-g`或`--global`选项。  
+这个选项仅生成UI组件有效。  
 ```bash
 beta generate component demo -g
 ```
-2. -p, --package：将业务模块创建在指定的包内，默认`module`命令创建的模块是直接创建在`src/modules`目录下，若想创建在一个目录内，可以带上`-p`或`--package`选项。  
-这个选项仅生成业务模块有效。
+* -p, --package：将业务模块创建在指定的包内，默认`module`命令创建的模块是直接创建在`src/modules`目录下，若想创建在一个目录内，可以带上`-p`或`--package`选项。  
+这个选项仅生成业务模块有效。  
 ```bash
 # 模块：src/modules/demo/demo.js
 beta generate module demo -p demo
 ```
-3. -f, --force：若构件已存在，默认不允许再生成，若想强制重新生成，就带上`-f`或`--force`选项，会覆盖旧构件。  
-这个选项对生成页面、组件和模块都有效。
+* -f, --force：若构件已存在，默认不允许再生成，若想强制重新生成，就带上`-f`或`--force`选项，会覆盖旧构件。  
+这个选项对生成页面、组件和模块都有效。  
 ```bash
 beta generate component demo -f
 ```
