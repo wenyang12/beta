@@ -3,7 +3,7 @@
 > 作者：罗瑛  
 > 联系：企信
 
-Beta是基于命令行的脚手架，支持从项目开始的创建到开发阶段，再到打包部署阶段的整个生命周期。  
+beta是基于命令行的脚手架，支持从项目开始的创建到开发阶段，再到打包部署阶段的整个生命周期。  
 
 ## 项目开始前
 从咱们私有npm仓库安装beta。
@@ -17,31 +17,37 @@ beta -h
 即可看到所有beta命令。
 
 ## 命令列表：
-### `create <project>`  
+* [create &lt;project&gt;](#create-project)
+* [init](#init)
+* [start](#start)
+* [buld [env]](#build-env)
+* [generate &lt;type&gt; [widgets...]](#generate-type-widgets)
+
+### create &lt;project&gt;
 新建一个H5项目，project参数为项目名称，根据预定义好的H5项目结构模板，自动生成项目结构和相关基础文件和代码。
 
-### `init`  
+### init
 初始化项目，这个命令会自动执行：git init、连接远程git仓库、添加子模块。  
 * git init：初始化git本地版本
 * 连接远程git仓库：实际执行的是`git add remote origin xxx.git`
 * 添加子模块：添加的子模块有`libs` `components` `mixins` `webpack`
 
 支持的选项列表：
-* -n, --npm： 自动执行`npm install`安装依赖
+1. -n, --npm： 自动执行`npm install`安装依赖
 ```bash
 beta init -n
 ```
 `npm install`可能会很慢，这个选项请谨慎。
 
-### `start`  
+### start
 启动项目，会自动执行`webpack`本地开发构建程序，开始编译代码，进入正式开发阶段。
 
-### `build [env]`  
+### build [env]
 构建项目，打包测试或生产环境代码。  
 `env`参数指定部署的环境，目前支持的环境有：`sde` `fte` `fte2` `pte` `fsceshi` `www`。  
 默认是`www`，即线上环境。
 
-### `generate <type> [widgets...]`  
+### generate &lt;type&gt; [widgets...]
 生成器，按约定的构件模板，自动生成指定类型的构件，统一规范。  
 支持同时生成多个构件，多个构件名称以空格分开。  
 * generate page：生成路由页面，页面生成在`src/pages`下
@@ -49,18 +55,18 @@ beta init -n
 * generate module：生成非UI组件的业务模块，模块生成在`src/modules`下
 
 支持的选项列表：
-* -g, --global：创建全局的公共组件，组件默认生成在业务项目的`src/components`目录下，若想在`components`子模块（全局公共组件仓库）创建一个组件，就要带上`-g`或`--global`选项。  
+1. -g, --global：创建全局的公共组件，组件默认生成在业务项目的`src/components`目录下，若想在`components`子模块（全局公共组件仓库）创建一个组件，就要带上`-g`或`--global`选项。  
 这个选项仅生成UI组件有效。
 ```bash
 beta generate component demo -g
 ```
-* -p, --package：将业务模块创建在指定的包内，默认`module`命令创建的模块是直接创建在`src/modules`目录下，若想创建在一个目录内，可以带上`-p`或`--package`选项。  
+2. -p, --package：将业务模块创建在指定的包内，默认`module`命令创建的模块是直接创建在`src/modules`目录下，若想创建在一个目录内，可以带上`-p`或`--package`选项。  
 这个选项仅生成业务模块有效。
 ```bash
 # 模块：src/modules/demo/demo.js
 beta generate module demo -p demo
 ```
-* -f, --force：若构件已存在，默认不允许再生成，若想强制重新生成，就带上`-f`或`--force`选项，会覆盖旧构件。  
+3. -f, --force：若构件已存在，默认不允许再生成，若想强制重新生成，就带上`-f`或`--force`选项，会覆盖旧构件。  
 这个选项对生成页面、组件和模块都有效。
 ```bash
 beta generate component demo -f
