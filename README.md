@@ -35,10 +35,10 @@ beta -h
 支持的选项列表：
 * -n, --npm： 自动执行`npm install`安装依赖
 
-  ```bash
-  beta init -n
-  ```
-  `npm install`可能会很慢，这个选项请谨慎。
+```bash
+beta init -n
+```
+`npm install`可能会很慢，这个选项请谨慎。
 
 ### start
 启动项目，会自动执行`webpack`本地开发构建程序，开始编译代码，进入正式开发阶段。
