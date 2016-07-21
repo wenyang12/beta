@@ -73,7 +73,7 @@ beta generate component demo -f
 ```
 
 ## 项目进程
-以`demo`作为H5项目来解说。  
+以`demo`作为H5项目来解说。
 1. 项目伊始，先找一个放置工程代码的目录，例如`D:/code/dev/h5`，在此处打开终端，创建一个`demo`工程。
 ```bash
 beta create demo
