@@ -33,8 +33,7 @@ beta -h
 * 添加子模块：添加的子模块有`libs` `components` `mixins` `webpack`
 
 支持的选项列表：
-* -n, --npm： 自动执行`npm install`安装依赖
-
+* -n, --npm： 自动执行`npm install`安装依赖  
 ```bash
 beta init -n
 ```
