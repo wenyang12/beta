@@ -11,7 +11,31 @@
 <meta name="format-detection" content="telephone=no,email=no" />
 <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>纷享逍客</title>
+<title>纷享逍客 - <%= htmlWebpackPlugin.options.title %></title>
+<% if(htmlWebpackPlugin.options.node_env === 'production') { %>
+<!-- production -->
+<script type="text/javascript">
+<%= htmlWebpackPlugin.options.rem %>
+(function() {
+var vendor = '<%= htmlWebpackPlugin.options.vendor %>';
+var embedVendor = '<%= htmlWebpackPlugin.options.embedVendor %>';
+var isApp = /FSBrowser/.test(navigator.userAgent);
+var isMobile = /Android|iPhone|iPod|iPad/i.test(navigator.userAgent);
+// 1.纷享逍客App(>=5.4)
+// 2.使用内嵌资源方式访问的移动端(<5.4)
+// 使用内嵌的vendor.js，提高访问速度
+if(isApp || (isMobile && /embed=1/.test(location.search))) {
+	document.write('<script src="' + embedVendor + '"><' + '/script>');
+} else {
+	document.write('<script src="' + vendor + '"><' + '/script>');
+}
+})();
+</script>
+<% } else { %>
+<!-- development -->
+<script src="<%= htmlWebpackPlugin.options.rem %>"></script>
+<script src="<%= htmlWebpackPlugin.options.vendor %>"></script>
+<% } %>
 </head>
 <body>
 <section id="${project}Container"></section>
@@ -19,20 +43,8 @@
 <!-- production -->
 <script type="text/javascript">
 (function() {
-var isMobile = /Android|iPhone|iPod|iPad/i.test(navigator.userAgent);
-var embedAssets = isMobile && (!/embed=(\d)/.test(location.search) ||
-	RegExp.$1 === '1');
-var remUrl = embedAssets ? '<%= htmlWebpackPlugin.options.embedRem %>' :
-	'<%= htmlWebpackPlugin.options.rem %>';
-var vendorUrl = embedAssets ?
-	'<%= htmlWebpackPlugin.options.embedVendor %>' :
-	'<%= htmlWebpackPlugin.options.vendor %>';
-document.write('<script src="' + remUrl + '"><' + '/script><script src="' +
-	vendorUrl + '"><' + '/script>');
-})();
-</script>
-<script type="text/javascript">
-(function() {
+// 生产环境引入filecache(js|css文件缓存)
+// 缓存业务js、css和jsapi.js
 <%= htmlWebpackPlugin.options.filecache %>
 cache.require('<%= htmlWebpackPlugin.options.jsapi %>', '<%= htmlWebpackPlugin.options.jsapi_version %>');
 <% for(var css in htmlWebpackPlugin.files.css) { %>
@@ -45,8 +57,6 @@ cache.require('<%= htmlWebpackPlugin.files.js[js] %>');
 </script>
 <% } else { %>
 <!-- development -->
-<script src="<%= htmlWebpackPlugin.options.rem %>"></script>
-<script src="<%= htmlWebpackPlugin.options.vendor %>"></script>
 <script src="<%= htmlWebpackPlugin.options.jsapi %>"></script>
 <% } %>
 </body>

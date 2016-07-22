@@ -29,5 +29,11 @@ commands.forEach((item) => {
   });
 });
 
+program
+  .command('*')
+  .action((cmd) => {
+    console.error(`Error:${cmd}命令不存在`);
+  });
+
 // 解析输入字符串，执行对应的命令操作
 program.parse(process.argv);

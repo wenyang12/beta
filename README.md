@@ -4,6 +4,7 @@
 > 联系：企信
 
 beta是基于命令行的脚手架，支持从项目开始的创建到开发阶段，再到打包部署阶段的整个生命周期。  
+致力于H5项目自动化、规范化和标准化。  
 
 ## 项目开始前
 从咱们私有npm仓库安装beta。
@@ -106,8 +107,9 @@ webpack即启动了。
 
 4. 代码需要一个首页才能跑起来，于是需要用生成器生成一个首页。
 ```bash
-beta generate page home
+beta generate page Home
 ```
+*React组件遵守JSX命名规范，首字母大写驼峰式命名*  
 这个命令会在`demo/src/pages`下生成一个`Home`目录，此目录下有`index.js`、`Home.jsx`和`home.less`三个文件。  
  * `index.js` 是入口文件，导出了真正的页面组件`Home.jsx`，已自动写上导出代码。  
  * `Home.jsx` 是真正的页面（React组件），开发时只需在此文件内添加代码。
@@ -115,8 +117,9 @@ beta generate page home
 
 5. 着手开发首页，发现需要一个头部组件。
 ```bash
-beta generate component header
+beta generate component Header
 ```
+*React组件遵守JSX命名规范，首字母大写驼峰式命名*  
 这个命令会在`demo/src/components`下生成一个`Header`目录，此目录下有`index.js`、`Header.jsx`和`header.less`三个文件。  
 这三个文件含义同上节的首页。
 

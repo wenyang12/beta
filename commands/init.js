@@ -12,7 +12,7 @@ const submodules = ['libs', 'components', 'mixins', 'webpack'];
 
 exports.run = function(options) {
   if (!shell.which('git')) {
-    console.error('不好，你还没有安装GIT');
+    console.error('Error:不好，你还没有安装GIT');
     process.exit(1);
   }
 
