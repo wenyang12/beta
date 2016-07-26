@@ -37,8 +37,9 @@ const utils = {
 
   // 同步逐级创建目录
   mkdirSync: function(dir, path) {
-    if (!path)
+    if (!path) {
       return;
+    }
     let paths = path.split('/');
     for (let i = 0; i < paths.length; i++) {
       dir += '/' + paths[i];
