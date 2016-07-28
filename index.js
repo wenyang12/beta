@@ -23,9 +23,9 @@ commands.forEach((item) => {
       command.option(v.option, v.desc || '');
     });
   }
-  command.action((...rest) => {
+  command.action(function() {
     let runner = require(`./commands/${command.name()}`);
-    return runner.run && runner.run(...rest);
+    return runner.run && runner.run.apply(null, arguments);
   });
 });
 
