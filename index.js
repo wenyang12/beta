@@ -6,10 +6,14 @@
 
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const program = require('commander');
 const npm_package = require('./package');
-const commands = require('./commands');
+const yaml = require('js-yaml');
 const utils = require('./utils');
+const yamlFile = path.resolve(__dirname, './commands.yml');
+const commands = yaml.safeLoad(fs.readFileSync(yamlFile, 'utf8'));
 
 program.version(npm_package.version);
 program.option('-v, --version', 'output the version number');

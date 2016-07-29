@@ -14,12 +14,14 @@ exports.generate = (modules, options) => {
     process.exit(1);
   }
 
+  let dir = module_dir;
+
   if (options.package) {
-    module_dir += `/${options.package}`;
+    dir += `/${options.package}`;
     try {
-      fs.statSync(module_dir);
+      fs.statSync(dir);
     } catch (e) {
-      fs.mkdirSync(module_dir);
+      fs.mkdirSync(dir);
     }
   }
 
@@ -34,7 +36,7 @@ exports.generate = (modules, options) => {
       process.exit(1);
     }
 
-    let file = `${module_dir}/${module}.js`;
+    let file = `${dir}/${module}.js`;
     let create = (file) => (fs.writeFileSync(file, 'module.exports = null;', 'utf8'));
     try {
       fs.statSync(file);
