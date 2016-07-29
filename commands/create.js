@@ -3,10 +3,11 @@
  */
 'use strict';
 const generator = require('../generator/project');
+const utils = require('../utils');
 
-exports.run = function(project) {
+exports.run = (project) => {
   if (!project) {
-    console.error('Error:必须指定项目名称');
+    utils.error('必须指定项目名称');
     process.exit(1);
   }
   generator.generate(project);

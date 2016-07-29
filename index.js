@@ -9,6 +9,7 @@
 const program = require('commander');
 const npm_package = require('./package');
 const commands = require('./commands');
+const utils = require('./utils');
 
 program.version(npm_package.version);
 program.option('-v, --version', 'output the version number');
@@ -19,9 +20,7 @@ commands.forEach((item) => {
   item.alias && command.alias(item.alias);
   item.desc && command.description(item.desc);
   if (item.options) {
-    item.options.forEach((v) => {
-      command.option(v.option, v.desc || '');
-    });
+    item.options.forEach((v) => command.option(v.option, v.desc || ''));
   }
   command.action(function() {
     let runner = require(`./commands/${command.name()}`);
@@ -31,9 +30,7 @@ commands.forEach((item) => {
 
 program
   .command('*')
-  .action((cmd) => {
-    console.error(`Error:${cmd}命令不存在`);
-  });
+  .action((cmd) => utils.error(`${cmd}命令不存在`));
 
 // 解析输入字符串，执行对应的命令操作
 program.parse(process.argv);

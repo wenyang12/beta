@@ -5,14 +5,15 @@
 
 const path = require('path');
 const shell = require('shelljs');
+const utils = require('../utils');
 const cwd = process.cwd();
 const project = path.basename(cwd);
 const gitlab = 'http://git.firstshare.cn/fe-h5';
 const submodules = ['libs', 'components', 'mixins', 'webpack'];
 
-exports.run = function(options) {
+exports.run = (options) => {
   if (!shell.which('git')) {
-    console.error('Error:不好，你还没有安装GIT');
+    utils.error('不好，你还没有安装GIT');
     process.exit(1);
   }
 

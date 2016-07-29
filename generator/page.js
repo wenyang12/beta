@@ -9,20 +9,20 @@ const utils = require('../utils');
 const cwd = process.cwd(); // 返回nodejs进程的当前工作目录
 const page_dir = `${cwd}/src/pages`; // 页面所在目录
 
-exports.generate = function(pages, options) {
+exports.generate = (pages, options) => {
   if (!pages || !pages.length) {
-    console.error('Error:至少指定一个页面');
+    utils.error('至少指定一个页面');
     process.exit(1);
   }
 
   pages.forEach((page) => {
     if (!/^[A-Z]/.test(page)) {
-      console.error('Error:页面名称必须已大写字母开头(JSX组件规范)');
+      utils.error('页面名称必须已大写字母开头(JSX组件规范)');
       process.exit(1);
     }
 
     if (!/^[a-zA-Z0-9]+$/.test(page)) {
-      console.error('Error:页面名称只能由英文字母和数字组成');
+      utils.error('页面名称只能由英文字母和数字组成');
       process.exit(1);
     }
 
@@ -33,7 +33,7 @@ exports.generate = function(pages, options) {
         utils.createComponent(page, page_dir);
         return;
       }
-      console.error(`Error:${page}页面已存在`);
+      utils.error(`${page}页面已存在`);
     } catch (e) {
       console.log(`开始创建${page}页面`);
       utils.createComponent(page, page_dir);

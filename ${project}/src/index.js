@@ -12,7 +12,7 @@ collector.config('${project}');
 
 // App初始化准备就绪
 let ready = require('libs/appready');
-ready('${project}', () => {
+ready('${project}', null, () => {
   let React = require('react');
   let ReactDOM = require('react-dom');
   let Router = require('react-router').Router;
@@ -23,8 +23,8 @@ ready('${project}', () => {
     render: function() {
       return (
         <section className="${project}-app">
-        {this.props.children}
-      </section>
+          {this.props.children}
+        </section>
       );
     }
   });

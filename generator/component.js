@@ -8,9 +8,9 @@ const fs = require('fs');
 const utils = require('../utils');
 const cwd = process.cwd();
 
-exports.generate = function(components, options) {
+exports.generate = (components, options) => {
   if (!components || !components.length) {
-    console.error('Error:至少指定一个组件');
+    utils.error('至少指定一个组件');
     process.exit(1);
   }
 
@@ -18,15 +18,15 @@ exports.generate = function(components, options) {
   let dir = cwd + (options.global ? '/components' : '/src/components');
   components.forEach((component) => {
     if (!/^[A-Z]/.test(component)) {
-      console.error('Error:组件名称必须已大写字母开头(JSX组件规范)');
+      utils.error('组件名称必须已大写字母开头(JSX组件规范)');
       process.exit(1);
     }
 
     if (!/^[a-zA-Z0-9]+$/.test(component)) {
-      console.error('Error:组件名称只能由英文字母和数字组成');
+      utils.error('组件名称只能由英文字母和数字组成');
       process.exit(1);
     }
-    
+
     try {
       fs.statSync(`${dir}/${component}`);
       if (options.force) {
@@ -34,7 +34,7 @@ exports.generate = function(components, options) {
         utils.createComponent(component, dir);
         return;
       }
-      console.error(`Error:${component}组件已存在`);
+      utils.error(`${component}组件已存在`);
     } catch (e) {
       console.log(`开始创建${component}组件`);
       utils.createComponent(component, dir);

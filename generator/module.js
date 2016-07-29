@@ -4,12 +4,13 @@
 'use strict';
 
 const fs = require('fs');
+const utils = require('../utils');
 const cwd = process.cwd();
 let module_dir = `${cwd}/src/modules`;
 
-exports.generate = function(modules, options) {
+exports.generate = (modules, options) => {
   if (!modules || !modules.length) {
-    console.error('Error:至少指定一个模块');
+    utils.error('至少指定一个模块');
     process.exit(1);
   }
 
@@ -24,19 +25,17 @@ exports.generate = function(modules, options) {
 
   modules.forEach((module) => {
     if (!/^[a-z]/.test(module)) {
-      console.error('Error:模块名称必须以小写字母开头');
+      utils.error('模块名称必须以小写字母开头');
       process.exit(1);
     }
 
     if (!/^[a-z0-9\-_]+$/.test(module)) {
-      console.error('Error:模块名称只能由小写字母、数字、-和_字符组成');
+      utils.error('模块名称只能由小写字母、数字、-和_字符组成');
       process.exit(1);
     }
 
     let file = `${module_dir}/${module}.js`;
-    let create = function(file) {
-      fs.writeFileSync(file, 'module.exports = null;', 'utf8');
-    };
+    let create = (file) => (fs.writeFileSync(file, 'module.exports = null;', 'utf8'));
     try {
       fs.statSync(file);
       if (options.force) {
@@ -44,7 +43,7 @@ exports.generate = function(modules, options) {
         create(file);
         return;
       }
-      console.error(`Error:模块${module}已存在`);
+      utils.error(`模块${module}已存在`);
     } catch (e) {
       console.log(`开始创建${module}模块`);
       create(file);

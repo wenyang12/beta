@@ -5,13 +5,14 @@
 
 const fs = require('fs');
 const path = require('path');
+const utils = require('../utils');
 const cwd = process.cwd(); // 返回nodejs进程的当前工作目录
 const root = path.resolve(__dirname, '../'); // 返回beta运行程序的所在目录
 const source = root + '/${project}'; // H5项目模板目录
 
-function create(project, src, dest) {
+const create = (project, src, dest) => {
   let files = fs.readdirSync(src); // 读取模板
-  files.forEach(function(file) {
+  files.forEach((file) => {
     let srcPath = `${src}/${file}`;
     let destPath = `${dest}/${file}`;
     let stats = fs.statSync(srcPath);
@@ -33,21 +34,21 @@ function create(project, src, dest) {
   });
 }
 
-exports.generate = function(project) {
+exports.generate = (project) => {
   if (!/^[a-z]/.test(project)) {
-    console.error('Error:项目名称必须以小写字母开头');
+    utils.error('项目名称必须以小写字母开头');
     process.exit(1);
   }
 
   if (!/^[a-z0-9\-_]+$/.test(project)) {
-    console.error('Error:项目名称只能由小写字母、数字、-和_字符组成');
+    utils.error('项目名称只能由小写字母、数字、-和_字符组成');
     process.exit(1);
   }
 
   let dest = `${cwd}/${project}`; // 新建项目所在目录
   try {
     fs.statSync(dest);
-    console.error(`Error:${project}项目已存在`);
+    utils.error(`${project}项目已存在`);
     process.exit(1);
   } catch (e) {
     console.log(`开始创建${project}项目`);

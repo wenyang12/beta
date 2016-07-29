@@ -1,4 +1,5 @@
 'use strict';
+
 const fs = require('fs');
 const utils = {
   /**
@@ -9,8 +10,8 @@ const utils = {
    * utils.createComponent('demo', '/home/luoying/code/dev/h5/demo/src/components')
    * utils.createComponent('demo/test', '/home/luoying/code/dev/h5/demo/src/components')
    */
-  createComponent: function(component, dest) {
-    let getFiles = function(cmpt) {
+  createComponent(component, dest) {
+    let getFiles = (cmpt) => {
       let lowercase = cmpt.toLowerCase();
       return [
         {
@@ -36,7 +37,7 @@ const utils = {
   },
 
   // 同步逐级创建目录
-  mkdirSync: function(dir, path) {
+  mkdirSync(dir, path) {
     if (!path) {
       return;
     }
@@ -49,10 +50,14 @@ const utils = {
         fs.mkdirSync(dir);
       }
     }
+  },
+
+  error(msg) {
+    console.error(`Error: \x1b[31m${msg}\x1b[0m`);
   }
 };
 
-function getJSXContent(name, less) {
+const getJSXContent = (name, less) => {
   let content = `require('./${less}.less');
 const React = require('react');\n
 const ${name} = React.createClass({
