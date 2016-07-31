@@ -14,7 +14,13 @@ npm install -g beta
 ```bash
 beta -h
 ```
-即可看到所有beta命令。命令的具体用法请看下面的命令列表和项目进程。
+即可看到所有beta命令。命令的具体用法请看下面的命令列表和项目进程。  
+若提示无此命令，则需要用root权限或管理员身份运行命令行终端，执行以下命令：
+```bash
+# mac或linux，sudo npm link
+# windows用管理员身份启动cmd
+npm link
+```
 
 ## 命令列表：
 * [beta create &lt;project&gt;](#beta-create-project)
