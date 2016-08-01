@@ -1,11 +1,11 @@
 {
   "name": "@tools/beta",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "H5项目脚手架",
   "contributors": [
     "Luoying <luoying@fxiaoke.com>"
   ],
-  "homepage": "https://www.fxiaoke.com",
+  "homepage": "http://registry-npm.firstshare.cn/",
   "main": "index.js",
   "bin": {
     "beta": "./bin/beta"
