@@ -6,7 +6,7 @@
 const fs = require('fs');
 const utils = require('../utils');
 const cwd = process.cwd();
-let module_dir = `${cwd}/src/modules`;
+let module_dir = `${cwd}`;
 
 exports.generate = (modules, options) => {
   if (!modules || !modules.length) {
@@ -14,16 +14,19 @@ exports.generate = (modules, options) => {
     process.exit(1);
   }
 
-  let dir = module_dir;
+  let type = options.type;
+  let match = cwd.match(/.*\/(\w+)\/(\w+)$/) || [];
+  if (!options.type) type = match[1];
 
-  if (options.package) {
-    dir += `/${options.package}`;
-    try {
-      fs.statSync(dir);
-    } catch (e) {
-      fs.mkdirSync(dir);
-    }
+  if (!type) {
+    utils.error('未知项目类型，请指定`type`选项');
+    process.exit(1);
   }
+
+  module_dir += {
+    h5: '/src/modules',
+    app: `/${match[2]}/modules`
+  }[type];
 
   modules.forEach((module) => {
     if (!/^[a-z]/.test(module)) {
@@ -31,13 +34,26 @@ exports.generate = (modules, options) => {
       process.exit(1);
     }
 
-    if (!/^[a-z0-9\-_]+$/.test(module)) {
-      utils.error('模块名称只能由小写字母、数字、-和_字符组成');
+    if (!/^[a-z0-9\-_\/]+$/.test(module)) {
+      utils.error('模块名称只能由小写字母、数字、-、_和/字符组成');
       process.exit(1);
     }
 
-    let file = `${dir}/${module}.js`;
-    let create = (file) => (fs.writeFileSync(file, 'module.exports = null;', 'utf8'));
+    let ms = module.split('/');
+    if (ms.length > 1) {
+      // 携带目录，先生成目录
+      let path = ms.slice(0, ms.length - 1).join('/');
+      utils.mkdirSync(module_dir, path);
+    }
+
+    let file = `${module_dir}/${module}.js`;
+    let code = {
+      h5: 'module.exports = null;',
+      app: `define(function(require, exports, module) {
+  module.exports = null;
+});`
+    }[type];
+    let create = (file) => (fs.writeFileSync(file, code, 'utf8'));
     try {
       fs.statSync(file);
       if (options.force) {

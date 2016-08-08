@@ -18,14 +18,18 @@ const commands = yaml.safeLoad(fs.readFileSync(yamlFile, 'utf8'));
 program.version(npm_package.version);
 program.option('-v, --version', 'output the version number');
 
-// 构建各命令
-commands.forEach((item) => {
-  let command = program.command(item.cmd);
+const createCommand = (parent, item) => {
+  let command = parent.command(item.cmd);
   item.alias && command.alias(item.alias);
   item.desc && command.description(item.desc);
-  if (item.options) {
-    item.options.forEach((v) => command.option(v.option, v.desc || ''));
-  }
+  item.options && item.options.forEach((v) => command.option(v.option, v.desc || ''));
+  item.cmds && item.cmds.forEach((sub) => createCommand(command, sub));
+  return command;
+};
+
+// 构建各命令
+commands.forEach((item) => {
+  let command = createCommand(program, item);
   command.action(function() {
     let runner = require(`./commands/${command.name()}`);
     return runner.run && runner.run.apply(null, arguments);

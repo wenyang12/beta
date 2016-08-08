@@ -36,14 +36,58 @@ const utils = {
     });
   },
 
+  /**
+   * 创建Backbone视图
+   * @param  {String} view 视图名
+   * @param  {String} dest 所在目标目录
+   * @example
+   * utils.createView('demo', '/home/luoying/code/dev/app/demo/demo/modules')
+   * utils.createView('demo/test', '/home/luoying/code/dev/app/demo/demo/modules')
+   */
+  createView(view, dest) {
+    let getFiles = (v) => {
+      return [
+        {
+          name: `${v}.js`,
+          data: `define(function(require, exports, module) {
+  var View = Backbone.View.extend({
+    template: require('./${v}-html'),
+    events: {},
+    initialize: function() {
+    },
+    render: function() {
+    },
+    destroy: function() {
+    }
+  });
+  module.exports = View;
+});`
+        }, {
+          name: `${v}.html`,
+          data: ''
+        }, {
+          name: `${v}.less`,
+          data: ''
+        }
+      ];
+    };
+    let files = getFiles(view.split('/').pop());
+    this.mkdirSync(dest, view);
+    files.forEach((file) => {
+      let _file = `${dest}/${view}/${file.name}`;
+      fs.writeFileSync(_file, file.data, 'utf8');
+      console.log(`完成：${_file}`);
+    });
+  },
+
   // 同步逐级创建目录
   mkdirSync(dir, path) {
     if (!path) {
       return;
     }
     let paths = path.split('/');
-    for (let i = 0; i < paths.length; i++) {
-      dir += '/' + paths[i];
+    for (let path of paths) {
+      dir += '/' + path;
       try {
         fs.statSync(dir);
       } catch (e) {

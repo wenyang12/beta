@@ -1,6 +1,6 @@
 /**
  * 生成React组件
- * 支持在父组件下创建子组件，调用方式：beta generate component parent/child
+ * 支持在父组件下创建子组件，调用方式：beta component parent/child
  */
 'use strict';
 
@@ -9,6 +9,7 @@ const utils = require('../utils');
 const cwd = process.cwd();
 
 exports.generate = (components, options) => {
+  console.log(options);
   if (!components || !components.length) {
     utils.error('至少指定一个组件');
     process.exit(1);

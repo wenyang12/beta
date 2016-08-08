@@ -1,0 +1,17 @@
+{
+  "browser": true,
+  "eqnull": true,
+  "undef": true,
+  "scripturl": true,
+  "globals": {
+    "_": true,
+    "$": true,
+    "jQuery": true,
+    "Backbone": true,
+    "seajs": true,
+    "define": true,
+    "FS": true
+  },
+  "-W030": true,
+  "-W084": true
+}

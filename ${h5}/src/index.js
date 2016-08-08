@@ -8,11 +8,11 @@ require('libs/touch-scroll');
 
 // 引入数据采集模块
 let collector = require('libs/collector');
-collector.config('${project}');
+collector.config('${h5}');
 
 // App初始化准备就绪
 let ready = require('libs/appready');
-ready('${project}', null, () => {
+ready('${h5}', null, () => {
   let React = require('react');
   let ReactDOM = require('react-dom');
   let Router = require('react-router').Router;
@@ -22,7 +22,7 @@ ready('${project}', null, () => {
   const App = React.createClass({
     render: function() {
       return (
-        <section className="${project}-app">
+        <section className="${h5}-app">
           {this.props.children}
         </section>
       );
@@ -35,6 +35,6 @@ ready('${project}', null, () => {
         <IndexRoute component={} />
       </Route>
     </Router>,
-    document.getElementById('${project}Container')
+    document.getElementById('${h5}Container')
   );
 });

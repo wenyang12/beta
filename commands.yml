@@ -1,30 +1,52 @@
 # 命令配置列表
 -
-  cmd: create <project>
-  desc: 新建一个H5项目，project参数为项目名称
+  cmd: create <project> [type]
+  desc: 新建项目，project：项目名称，type：`h5`和`app`，若不指定，根据目录名推导项目类型
 -
   cmd: init
+  desc: 初始化项目，自动执行：git init、连接远程git仓库、添加子模块
   options:
     -
       option: -n, --npm
       desc: 执行npm install安装相关依赖包
-  desc: 初始化项目，自动执行：git init、连接远程git仓库、添加子模块
+    -
+      option: -r, --registry <url>
+      desc: 指定项目的git仓库地址，例如：`fe-h5/demo.git`，若不指定，根据项目目录名和上级目录名推导
 -
   cmd: start
-  desc: 启动项目，自动执行webpack.config.js
+  desc: 启动项目，自动执行`npm run dev`脚本
 -
   cmd: build [env]
-  desc: 构建项目，打包测试或生产环境代码，env参数指定部署环境，支持的环境有`sde` `fte` `fte2` `pte` `fsceshi` `www`
+  desc: 构建项目，打包测试或生产环境代码，env参数指定部署环境
 -
-  cmd: generate <type> [widgets...]
+  cmd: generate
+  desc: 生成器
+  cmds:
+    -
+      cmd: page [pages...]
+      desc: 生成页面，仅H5项目
+    -
+      cmd: component [components...]
+      desc: 生成React组件，仅H5项目
+    -
+      cmd: module [modules...]
+      desc: 生成非UI组件的模块
+    -
+      cmd: view [views...]
+      desc: 生成Backbone视图，仅App项目
+    -
+      cmd: ssi [ssis...]
+      desc: 生成ssi碎片，仅官网
   options:
     -
-      option: -g, --global
-      desc: 创建全局的公共组件
-    -
-      option: -p, --package <package>
-      desc: 将业务模块创建在指定的包内
-    -
       option: -f, --force
-      desc: 若构件已存在，强制重新生成，旧构件被删除
-  desc: 生成器，自动生成指定类型的构件，支持的类型有`page` `module` `component`，支持同时生成多个构件，多个构件名称以空格分开
+      desc: 若已存在，强制重新生成，旧的被覆盖
+    -
+      option: -g, --global
+      desc: 创建全局的公共React组件
+    -
+      option: -t, --type <type>
+      desc: 指定生成哪种应用类型的模块，支持`h5`、`app`，默认根据项目目录名推导
+    -
+      option: -j, --js
+      desc: ssi是否需要同时生成js脚本文件

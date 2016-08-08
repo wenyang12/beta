@@ -8,8 +8,8 @@
 ## 关于项目内引用公共库
 1. 预先安装`Git`。
 2. 了解`Git submodule`子模块的概念。
-3. 签出仓库：`git clone http://git.firstshare.cn/fe-h5/${project}.git --recursive`
-最后的参数表示递归签出公共库作为本项目的子模块，会看到在${project}目录下自动生成了`libs`、`mixins`、`components`三个公共库目录。
+3. 签出仓库：`git clone http://git.firstshare.cn/fe-h5/${h5}.git --recursive`
+最后的参数表示递归签出公共库作为本项目的子模块，会看到在${h5}目录下自动生成了`libs`、`mixins`、`components`三个公共库目录。
 实际上，这三个公共库只是全局公共库的一个引用。
 4. 开发时，只需引用本项目内的公共库子模块即可，不必单独在父级目录签出公共仓库。
 5. 如果签出时忘了输入`recursive`参数，没关系，可以这样补救：先运行`git submodule init`，再运行`git submodule update`。

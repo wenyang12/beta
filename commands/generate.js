@@ -2,13 +2,9 @@
  * 构件生成器
  */
 'use strict';
-const utils = require('../utils');
-
-exports.run = (type, widgets, options) => {
-  if (!widgets.length) {
-    utils.error('至少指定一个构件名称');
-    process.exit(1);
-  }
+exports.run = function(type) {
+  let argv = Array.prototype.slice.call(arguments, 1);
+  let options = argv.pop();
   let generator = require(`../generator/${type}`);
-  generator.generate && generator.generate(widgets, options);
+  generator.generate && generator.generate(argv, options);
 };

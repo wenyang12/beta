@@ -1,0 +1,35 @@
+{
+  "name": "app-${app}-build",
+  "version": "0.0.0",
+  "description": "For app-${app} project build",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "dev": "grunt dev",
+    "product": "grunt release",
+    "build-development": "grunt build",
+    "build-product": "grunt release",
+    "jshint": "grunt jshint"
+  },
+  "pre-commit": ["jshint"],
+  "repository": "http://git.firstshare.cn/fe-app/${app}.git",
+  "author": "13",
+  "license": "BSD",
+  "devDependencies": {
+    "cmd-util": "~0.3.13",
+    "grunt": "~1.0.1",
+    "grunt-cleanempty": "~1.0.4",
+    "grunt-cmd-transport": "~0.5.1",
+    "grunt-contrib-clean": "~1.0.0",
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-contrib-cssmin": "~1.0.1",
+    "grunt-contrib-htmlmin": "~1.4.0",
+    "grunt-contrib-imagemin": "~1.0.0",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-jst": "~1.0.0",
+    "grunt-contrib-less": "^1.3.0",
+    "grunt-contrib-uglify": "~1.0.1",
+    "grunt-contrib-watch": "~1.0.0",
+    "pre-commit": "^1.1.3"
+  }
+}
