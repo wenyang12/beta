@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>>
+<html id="fxiaoke" lang="zh-CN" <% if(htmlWebpackPlugin.files.manifest) { %> manifest="<%= htmlWebpackPlugin.files.manifest %>"<% } %>>
 <head>
 <meta charset="utf-8" />
+<meta name="renderer" content="webkit"/>
 <% if(htmlWebpackPlugin.options.node_env === 'production') { %>
 <meta http-equiv="x-dns-prefetch-control" content="on" />
 <link rel="dns-prefetch" href="//<%= htmlWebpackPlugin.options.env %>.fspage.com" />
@@ -15,20 +16,13 @@
 <% if(htmlWebpackPlugin.options.node_env === 'production') { %>
 <!-- production -->
 <script type="text/javascript">
+var isApp = /FSBrowser/.test(navigator.userAgent);
 <%= htmlWebpackPlugin.options.rem %>
 (function() {
 var vendor = '<%= htmlWebpackPlugin.options.vendor %>';
 var embedVendor = '<%= htmlWebpackPlugin.options.embedVendor %>';
-var isApp = /FSBrowser/.test(navigator.userAgent);
-var isMobile = /Android|iPhone|iPod|iPad/i.test(navigator.userAgent);
-// 1.纷享逍客App(>=5.4)
-// 2.使用内嵌资源方式访问的移动端(<5.4)
-// 使用内嵌的vendor.js，提高访问速度
-if(isApp || (isMobile && /embed=1/.test(location.search))) {
-	document.write('<script src="' + embedVendor + '"><' + '/script>');
-} else {
-	document.write('<script src="' + vendor + '"><' + '/script>');
-}
+// 纷享销客App(>=5.4)，使用内嵌的vendor.js，提高访问速度
+document.write('<script src="' + (isApp ? embedVendor : vendor) + '"><' + '/script>');
 })();
 </script>
 <% } else { %>
@@ -38,7 +32,7 @@ if(isApp || (isMobile && /embed=1/.test(location.search))) {
 <% } %>
 </head>
 <body>
-<section id="${h5}Container"></section>
+<section id="${h5}Container" class="${h5}-app"></section>
 <% if(htmlWebpackPlugin.options.node_env === 'production') { %>
 <!-- production -->
 <script type="text/javascript">
