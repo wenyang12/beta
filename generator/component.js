@@ -9,7 +9,6 @@ const utils = require('../utils');
 const cwd = process.cwd();
 
 exports.generate = (components, options) => {
-  console.log(options);
   if (!components || !components.length) {
     utils.error('至少指定一个组件');
     process.exit(1);

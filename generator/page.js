@@ -14,7 +14,7 @@ exports.generate = (pages, options) => {
     utils.error('至少指定一个页面');
     process.exit(1);
   }
-console.log(pages);
+  
   pages.forEach((page) => {
     if (!/^[A-Z]/.test(page)) {
       utils.error('页面名称必须已大写字母开头(JSX组件规范)');
