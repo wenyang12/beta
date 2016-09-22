@@ -3,8 +3,6 @@ require('./index.less');
 
 // 初始化App的相关模块引入
 require('libs/fastclick-attach');
-// require('libs/touchmove-preventdefault');
-// require('libs/touch-scroll');
 require('libs/network');
 
 // 引入数据采集模块
@@ -15,8 +13,8 @@ let $ = require('zepto');
 let device = require('libs/device');
 
 let platform = device.ios ? 'ios' : (device.android ? 'android' : 'pc');
-let html = document.getElementById('fxiaoke');
-$(html).addClass(platform).addClass(window.isApp ? 'app' : '');
+let root = document.getElementById('fxiaoke');
+$(root).addClass(platform).addClass(device.app ? 'app' : '');
 
 // App初始化准备就绪
 let ready = require('libs/appready');
