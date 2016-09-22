@@ -31,7 +31,7 @@ var isApp = /FSBrowser/.test(navigator.userAgent);
 var vendor = '<%= htmlWebpackPlugin.options.vendor %>';
 var embedVendor = '<%= htmlWebpackPlugin.options.embedVendor %>';
 // 纷享App(>=5.4)，使用内嵌的vendor.js，提高访问速度
-document.write('<script src="' + (isApp ? embedVendor ? vendor) +'"><' + '/script>');
+document.write('<script src="' + (isApp ? embedVendor : vendor) +'"><' + '/script>');
 </script>
 </head>
 <body>
